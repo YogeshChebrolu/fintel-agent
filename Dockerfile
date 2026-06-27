@@ -2,9 +2,9 @@
 # -----------------------------------------------------------------------------
 # Dockerfile for apps/api (Hono on Bun) — used by Railway.
 #
-# The API depends on workspace packages (@fintel/agent, @fintel/backend) that
-# live at the repo root, so the build context is the WHOLE monorepo and the
-# install happens at the root. We only run the api at the end.
+# The API depends on the @fintel/agent workspace package that lives at the repo
+# root, so the build context is the WHOLE monorepo and the install happens at the
+# root. We only run the api at the end.
 # -----------------------------------------------------------------------------
 FROM oven/bun:1.3.4-alpine AS deps
 WORKDIR /app
@@ -26,11 +26,8 @@ ENV NODE_ENV=production
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Generate Convex types so the lazy `import("@fintel/backend")` in the
-# /api/messages route resolves. Best-effort: the agent chat works without it,
-# and codegen needs no deploy key (it reads the local convex/ folder).
-RUN cd packages/convex && bunx convex codegen --typecheck disable || \
-    echo "convex codegen skipped — /api/messages will 500 until types exist"
+# No `convex codegen` needed: the /api/messages route calls Convex by reference
+# via `anyApi`, so the API runs against the live deployment without generated code.
 
 # Railway injects PORT; the server reads process.env.PORT (defaults to 8787).
 EXPOSE 8787

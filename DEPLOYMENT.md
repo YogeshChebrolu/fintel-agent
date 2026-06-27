@@ -97,15 +97,13 @@ emails) go in the Convex dashboard, not Railway/Vercel.
 
 ## Notes & gotchas
 
-- **`/api/messages` on Railway**: this REST route lazy-imports the generated
-  Convex client. The Docker image runs `convex codegen` best-effort with no
-  Convex creds, so the types may be absent and that one route returns 500. The
-  **agent chat is unaffected** — it doesn't touch Convex. To enable the route,
-  add `CONVEX_DEPLOY_KEY` as a Railway variable and re-add the codegen step with
-  the key.
-- **Convex generated code is gitignored**, so every build regenerates it. That's
-  why the Vercel build goes through `convex deploy` rather than a bare
-  `next build`.
+- **The API needs no Convex codegen.** `/api/messages` calls the deployed query
+  by reference (`makeFunctionReference("messages:list")`), so the Docker image
+  ships without generated code and the route works against the live deployment
+  given a valid `CONVEX_URL`. The only cost is that call being untyped.
+- **The web build still regenerates Convex code** (it's gitignored), which is why
+  Vercel goes through `convex deploy --cmd 'next build'` rather than a bare
+  `next build` — the web app uses the generated `api` for end-to-end types.
 - **SSE idle timeout**: Bun is capped at `idleTimeout: 255` (in
   `apps/api/src/index.ts`). Railway's proxy allows long-lived streams, so this
   is the binding limit — fine for chat responses.
