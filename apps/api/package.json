@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@fintel/agent": "workspace:*",
-    "@fintel/backend": "workspace:*",
     "convex": "1.42.0",
     "hono": "4.12.27"
   },
