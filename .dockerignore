@@ -1,0 +1,28 @@
+# Installed fresh inside the image
+node_modules
+**/node_modules
+
+# Build artifacts
+apps/web/.next
+apps/web/out
+**/dist
+**/build
+**/*.tsbuildinfo
+
+# Secrets — provided as Railway environment variables, never baked into the image
+.env
+.env.*
+**/.env
+**/.env.*
+
+# VCS / editor / OS
+.git
+.gitignore
+.idea
+.vscode
+**/.DS_Store
+
+# Docs & local-only files
+*.md
+!packages/**/*.md
+temp-openrouter-ai-sdk-setup.md
