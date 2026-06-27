@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useQuery } from "convex/react";
-import { api } from "@fintel/backend";
+import { api } from "@fintel/convex";
 import { MessageBoard } from "@/components/message-board";
 import { StreamDemo } from "@/components/stream-demo";
 import { AgentChat } from "@/components/agent-chat";

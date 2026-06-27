@@ -42,7 +42,7 @@ fintel-agent/
 │   └── api/                  # Hono + Bun service
 │       └── src/index.ts      # /health, /api/messages, /api/stream
 ├── packages/
-│   └── convex/               # Convex backend (package name: @fintel/backend)
+│   └── convex/               # Convex backend (package name: @fintel/convex)
 │       ├── index.ts          # re-exports the generated `api`
 │       └── convex/
 │           ├── schema.ts     # tables (auth tables + `messages`)
@@ -161,7 +161,7 @@ bun run dev:backend    # Convex only
 ## Where to build next
 
 - **A new DB table** → add it to [`packages/convex/convex/schema.ts`](packages/convex/convex/schema.ts), then write queries/mutations alongside `messages.ts`.
-- **A reactive feature** → call `useQuery(api.x.y)` / `useMutation(api.x.z)` from a client component. Import `api` from `@fintel/backend`.
+- **A reactive feature** → call `useQuery(api.x.y)` / `useMutation(api.x.z)` from a client component. Import `api` from `@fintel/convex`.
 - **An AI agent / streaming endpoint** → add a route in [`apps/api/src/index.ts`](apps/api/src/index.ts) using `streamText`; swap the demo token loop for the Anthropic SDK. Read it from the browser with `fetch()`.
 - **A webhook or public REST endpoint** → also goes in the Hono service; reach Convex with the `ConvexHttpClient` already set up there.
 - **More UI components** → `cd apps/web && bunx shadcn@latest add <component>`.

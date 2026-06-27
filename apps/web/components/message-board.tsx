@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useMutation, useQuery } from "convex/react";
 import { Send } from "lucide-react";
-import { api } from "@fintel/backend";
+import { api } from "@fintel/convex";
 import { Button } from "@/components/ui/button";
 import {
   Card,
