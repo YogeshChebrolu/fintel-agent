@@ -5,6 +5,7 @@ import { useQuery } from "convex/react";
 import { api } from "@fintel/backend";
 import { MessageBoard } from "@/components/message-board";
 import { StreamDemo } from "@/components/stream-demo";
+import { AgentChat } from "@/components/agent-chat";
 import { SignOutButton } from "@/components/sign-out-button";
 
 export default function AppPage() {
@@ -32,6 +33,7 @@ export default function AppPage() {
         <SignOutButton />
       </header>
 
+      <AgentChat />
       <MessageBoard />
       <StreamDemo />
     </main>

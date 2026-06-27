@@ -1,0 +1,26 @@
+{
+  "name": "@fintel/agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./lib/deepseek": "./lib/deepseek.ts",
+    "./lib/openrouter": "./lib/openrouter.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ai-sdk/deepseek": "2.0.41",
+    "@openrouter/ai-sdk-provider": "2.10.0",
+    "ai": "6.0.213",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "26.0.1",
+    "typescript": "6.0.3"
+  }
+}
